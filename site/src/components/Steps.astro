@@ -1,0 +1,38 @@
+---
+// "How it works" in three steps. Defaults come from src/data/steps.ts (write them for the client).
+import { steps as defaultSteps } from '../data/steps';
+interface Props { dark?: boolean; title?: string; steps?: { t: string; d: string }[]; }
+const {
+  dark = false,
+  title = 'How It Works',
+  steps = defaultSteps,
+} = Astro.props;
+---
+<section class:list={['section', { 'section--dark': dark, 'section--paper': !dark }]}>
+  <div class="container">
+    <div class="center steps__head">
+      <span class="eyebrow">How it works</span>
+      <h2 class="section-title">{title}</h2>
+    </div>
+    <ol class="steps">
+      {steps.map((s, i) => (
+        <li class="step">
+          <span class="step__n" aria-hidden="true">{i + 1}</span>
+          <h3>{s.t}</h3>
+          <p>{s.d}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>
+
+<style>
+  .steps__head { margin-bottom: 40px; }
+  .steps { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 28px; }
+  .step { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 30px 26px 26px; }
+  .section--dark .step { background: #2e3236; border-color: #3a3f44; }
+  .step__n { display: grid; place-items: center; width: 54px; height: 54px; background: var(--red); color: #fff; font-family: var(--head); font-weight: 800; font-size: 32px; border-radius: var(--radius); margin-bottom: 16px; }
+  .step h3 { font-size: 27px; text-transform: uppercase; }
+  .step p { margin: 0; }
+  @media (max-width: 860px) { .steps { grid-template-columns: 1fr; } }
+</style>

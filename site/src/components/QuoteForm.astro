@@ -1,0 +1,36 @@
+---
+// GoHighLevel quote form. Set ghl.quoteForm in src/data/site.ts to switch it on; until then a call card shows.
+import { site, ghl, waLink } from '../data/site';
+const formId = ghl.quoteForm.split('/').pop();
+---
+<div class="quote" id="quote-form">
+  <div class="quote__head">
+    <h2>{site.ctaLabel}</h2>
+    <p>Tell us what you need. We’ll get back to you quickly.</p>
+  </div>
+  {ghl.quoteForm ? (
+    <>
+      <iframe src={ghl.quoteForm} id={`inline-${formId}`} title={site.ctaLabel} style={`width:100%;height:${ghl.quoteFormHeight}px;border:none;border-radius:4px`} data-layout="{'id':'INLINE'}" data-trigger-type="alwaysShow" data-activation-type="alwaysActivated" data-deactivation-type="neverDeactivate" data-form-id={formId} loading="lazy"></iframe>
+      <script is:inline src={ghl.embedScript} defer></script>
+    </>
+  ) : (
+    <div>
+      <p class="quote__lead">The fastest way to get help is a phone call:</p>
+      <a class="btn btn--red quote__call" href={`tel:${site.phoneIntl}`}>Call {site.phone}</a>
+      {waLink() && <a class="btn btn--outline quote__call quote__wa" href={waLink()} rel="noopener">Message us on WhatsApp</a>}
+      {site.email && <p class="quote__alt">Prefer email? Write to <a href={`mailto:${site.email}`}>{site.email}</a>.</p>}
+    </div>
+  )}
+</div>
+
+<style>
+  .quote { background: #fff; border-top: 6px solid var(--red); border-radius: var(--radius); box-shadow: 0 18px 44px rgba(0,0,0,.16); padding: 30px; color: var(--text); }
+  .quote__head h2 { font-size: 38px; text-transform: uppercase; margin-bottom: 4px; }
+  .quote__head p { color: var(--muted); }
+  .quote__lead { font-weight: 600; color: var(--ink); margin-bottom: 12px; }
+  .quote__call { width: 100%; font-size: 26px; padding: 16px 20px; margin-bottom: 18px; }
+  .quote__wa { font-size: 21px; }
+  .quote__alt { font-size: 16px; color: var(--muted); margin: 0; }
+  .quote__alt a { white-space: nowrap; }
+  @media (max-width: 560px) { .quote { padding: 22px 18px; } .quote__head h2 { font-size: 32px; } }
+</style>

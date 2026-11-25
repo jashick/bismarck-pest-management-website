@@ -1,0 +1,147 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import Steps from '../../components/Steps.astro';
+import Faq from '../../components/Faq.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { areas, type Area } from '../../data/areas';
+import { services } from '../../data/services';
+import { gallery } from '../../data/gallery';
+import { site, img, img800 } from '../../data/site';
+import { breadcrumbs, service } from '../../data/schema';
+
+export function getStaticPaths() {
+  // Every area page must have a section for every service page. Fail the build if one is missing.
+  for (const a of areas) {
+    const missing = services.filter((s) => !a.services[s.slug]).map((s) => s.slug);
+    if (missing.length) throw new Error(`areas.ts: "${a.slug}" is missing service sections for: ${missing.join(', ')}`);
+  }
+  return areas.map((a) => ({ params: { area: a.slug }, props: { a } }));
+}
+const { a } = Astro.props as { a: Area };
+const href = `/service-areas/${a.slug}/`;
+const crumbs = [{ name: 'Service Areas', href: '/service-areas/' }, { name: a.name, href }];
+const others = areas.filter((x) => x.slug !== a.slug);
+const svc = services.filter((s) => a.services[s.slug]);
+const pics = a.gallery.map((src) => gallery.find((g) => g.src === src)!).filter(Boolean);
+---
+<Base title={a.title} description={a.description} image={img(a.photo)} schema={[breadcrumbs(crumbs), service(`${site.shortName} in ${a.name}`, a.answer, href, { '@type': 'City', name: `${a.name}, ${a.province || site.regionName}` })]}>
+  <PageHero eyebrow={`${a.name}, ${a.province || site.region}`} title={a.h1} sub={a.sub} photo={a.photo} crumbs={crumbs} />
+
+  <section class="section">
+    <div class="container agrid">
+      <div>
+        <div class="answer"><p>{a.answer}</p></div>
+        <div class="copy">{a.local.map((p) => <p>{p}</p>)}</div>
+      </div>
+      <aside class="box">
+        <h2>Serving {a.name}</h2>
+        <p class="dist">{a.distance}</p>
+        <ul class="tags">{a.nearby.map((n) => <li>{n}</li>)}</ul>
+        <ul class="facts">
+          <li>Free quotes before any work starts</li>
+          <li>Pest control, fumigation, termites and disinfection from one company</li>
+          {site.license && <li>Licensed: {site.license}</li>}
+        </ul>
+        <a class="btn btn--red" href={site.quoteUrl}>{site.ctaLabel}</a>
+        <a class="phone" href={`tel:${site.phoneIntl}`}>{site.phone}</a>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section section--paper">
+    <div class="container">
+      <span class="eyebrow">Services in {a.name}</span>
+      <h2 class="section-title">Our Services in {a.name}</h2>
+      <div class="svc">
+        {svc.map((s) => (
+          <article class="svc__item">
+            <a class="svc__img" href={`/${s.slug}/`} tabindex="-1" aria-hidden="true"><img src={img800(s.photos[0].src)} alt="" width="800" height="600" loading="lazy" /></a>
+            <div class="svc__body">
+              <h3>{s.navName} in {a.name}</h3>
+              <p>{a.services[s.slug]}</p>
+              <a class="more" href={`/${s.slug}/`}>More about {s.navName.toLowerCase()}</a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <span class="eyebrow">Neighborhoods</span>
+      <h2 class="section-title">Where We Work In and Around {a.name}</h2>
+      <div class="places">{a.places.map((p) => <div class="place"><h3>{p.name}</h3><p>{p.d}</p></div>)}</div>
+    </div>
+  </section>
+
+  <section class="section section--paper">
+    <div class="container">
+      <span class="eyebrow">Local know-how</span>
+      <h2 class="section-title">Working in {a.name}: What to Know</h2>
+      <div class="build">{a.build.map((b) => <div class="card"><h3>{b.t}</h3><p>{b.d}</p></div>)}</div>
+    </div>
+  </section>
+
+  {pics.length > 0 && (
+    <section class="section">
+      <div class="container">
+        <div class="work-head">
+          <div>
+            <span class="eyebrow">Our work</span>
+            <h2 class="section-title">Recent Work</h2>
+          </div>
+          <a class="btn btn--outline" href="/our-work/">See the full gallery</a>
+        </div>
+        <div class="strip">{pics.map((p) => <figure class="photo"><img src={img800(p.src)} alt={p.alt} width="800" height="600" loading="lazy" /></figure>)}</div>
+      </div>
+    </section>
+  )}
+
+  <Steps dark />
+  <Faq faqs={a.faqs} title={`Questions from ${a.name} Homeowners`} />
+
+  <section class="section section--paper">
+    <div class="container">
+      <h2 class="section-title">Other Areas We Serve</h2>
+      <ul class="others">{others.map((o) => <li><a href={`/service-areas/${o.slug}/`}>{o.name}</a></li>)}</ul>
+    </div>
+  </section>
+
+  <CtaBand title={`Need Help in ${a.name}?`} photo={a.photo} />
+</Base>
+
+<style>
+  .agrid { display: grid; grid-template-columns: 1fr 340px; gap: 56px; align-items: start; }
+  .copy { margin-top: 24px; }
+  .box { border: 1px solid var(--line); border-top: 5px solid var(--red); border-radius: var(--radius); padding: 24px; position: sticky; top: 130px; }
+  .box h2 { font-size: 26px; }
+  .dist { font-size: 16px; color: var(--muted); }
+  .tags { list-style: none; padding: 0; margin: 0 0 18px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .tags li { background: var(--paper); border-radius: 4px; padding: 4px 10px; font-weight: 600; font-size: 15px; color: var(--ink); }
+  .facts { list-style: none; padding: 0; margin: 0 0 20px; font-size: 15px; }
+  .facts li { padding: 6px 0; border-top: 1px solid var(--line); }
+  .box .btn { width: 100%; }
+  .phone { display: block; text-align: center; margin-top: 12px; font-family: var(--head); font-size: 26px; color: var(--navy); text-decoration: none; }
+  .svc { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 30px; }
+  .svc__item { display: grid; grid-template-columns: 200px 1fr; background: #fff; border-radius: var(--radius); overflow: hidden; }
+  .svc__img img { width: 100%; height: 100%; object-fit: cover; }
+  .svc__body { padding: 22px 24px; }
+  .svc__body h3 { font-size: 24px; }
+  .svc__body p { font-size: 17px; }
+  .more { font-weight: 700; }
+  .places { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px 36px; margin-top: 30px; }
+  .place { border-left: 3px solid var(--red); padding-left: 18px; }
+  .place h3 { font-size: 23px; margin-bottom: 6px; }
+  .place p { margin: 0; font-size: 17px; }
+  .build { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; margin-top: 30px; }
+  .work-head { display: flex; justify-content: space-between; align-items: end; gap: 20px; flex-wrap: wrap; }
+  .strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 28px; }
+  .strip figure { margin: 0; aspect-ratio: 4 / 3; }
+  .others { list-style: none; padding: 0; margin: 20px 0 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+  .others a { display: block; background: #fff; border: 1px solid var(--line); border-left: 4px solid var(--red); border-radius: var(--radius); padding: 14px 18px; font-family: var(--head); font-size: 22px; color: var(--navy); text-decoration: none; }
+  @media (max-width: 1000px) { .svc { grid-template-columns: 1fr; } .places { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 900px) { .agrid { grid-template-columns: 1fr; } .box { position: static; } }
+  @media (max-width: 600px) { .svc__item { grid-template-columns: 1fr; } .svc__img { aspect-ratio: 16 / 9; } .places, .build { grid-template-columns: 1fr; } .strip { grid-template-columns: 1fr 1fr; } }
+</style>

@@ -1,0 +1,127 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Steps from '../components/Steps.astro';
+import Faq from '../components/Faq.astro';
+import CtaBand from '../components/CtaBand.astro';
+import ServiceCards from '../components/ServiceCards.astro';
+import { services, getService, childrenOf, type Service } from '../data/services';
+import { site, img, img800 } from '../data/site';
+import { breadcrumbs, service } from '../data/schema';
+
+export function getStaticPaths() {
+  return services.map((s) => ({ params: { service: s.slug }, props: { s } }));
+}
+const { s } = Astro.props as { s: Service };
+const href = `/${s.slug}/`;
+// Breadcrumbs follow the category structure: Home > Services > Category > Service
+const parent = s.parent ? getService(s.parent) : undefined;
+const crumbs = [
+  { name: 'Services', href: '/services/' },
+  ...(parent ? [{ name: parent.navName, href: `/${parent.slug}/` }] : []),
+  { name: s.navName, href },
+];
+const kids = childrenOf(s.slug);
+const [lead, ...gallery] = s.photos;
+const heat = !!s.emergency;
+---
+<Base title={s.title} description={s.description} image={img(lead.src)} schema={[breadcrumbs(crumbs), service(s.navName, s.answer, href)]}>
+  <PageHero eyebrow={s.navName} title={s.h1} sub={s.sub} photo={lead.src} crumbs={crumbs} heat={heat}
+    primary={heat ? { label: `Call ${site.phone}`, href: `tel:${site.phoneIntl}` } : undefined}
+    secondary={heat ? { label: site.ctaLabel, href: site.quoteUrl } : undefined} />
+
+  <section class="section">
+    <div class="container grid grid-2 top">
+      <div>
+        {parent && <p class="upline">Part of our <a href={`/${parent.slug}/`}>{parent.navName.toLowerCase()}</a> services</p>}
+        <div class="answer"><p>{s.answer}</p></div>
+        <div class="intro">{s.intro.map((p) => <p>{p}</p>)}</div>
+        <div class="btn-row">
+          <a class:list={['btn', heat ? 'btn--heat' : 'btn--red']} href={`tel:${site.phoneIntl}`}>Call {site.phone}</a>
+          <a class="btn btn--outline" href={site.quoteUrl}>{site.ctaLabel}</a>
+        </div>
+      </div>
+      <figure class="photo pic"><img src={img800(lead.src)} srcset={`${img800(lead.src)} 800w, ${img(lead.src)} 1600w`} sizes="(max-width: 860px) 100vw, 560px" alt={lead.alt} width="800" height="600" loading="lazy" /></figure>
+    </div>
+  </section>
+
+  <section class="section section--paper">
+    <div class="container grid grid-2 top">
+      <div>
+        <h2 class="section-title">What we handle</h2>
+        <ul class="checks">{s.includes.map((t) => <li>{t}</li>)}</ul>
+      </div>
+      <div>
+        <h2 class="section-title">{heat ? 'Call right away if' : 'When to call us'}</h2>
+        <ul class:list={['checks', { 'checks--heat': heat }]}>{s.signs.map((t) => <li>{t}</li>)}</ul>
+      </div>
+    </div>
+  </section>
+
+  {kids.length > 0 && (
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">{s.navName} services</h2>
+        <div class="kids">{kids.map((k) => <a class="kid" href={`/${k.slug}/`}><strong>{k.navName}</strong><span>{k.blurb}</span></a>)}</div>
+      </div>
+    </section>
+  )}
+
+  {(s.sections || []).map((x, i) => (
+    <section class:list={['section', { 'section--paper': i % 2 === 1 }]} id={x.id}>
+      <div class="container prose">
+        <h2 class="section-title">{x.h}</h2>
+        {x.p.map((p) => <p>{p}</p>)}
+        {x.list && <ul class="dotlist">{x.list.map((li) => <li>{li}</li>)}</ul>}
+      </div>
+    </section>
+  ))}
+
+  <section class="section section--dark">
+    <div class="container">
+      <h2 class="section-title">Why call {site.shortName}</h2>
+      <div class="grid grid-3 mt why">{s.why.map((w) => <div><h3>{w.t}</h3><p>{w.d}</p></div>)}</div>
+    </div>
+  </section>
+
+  {gallery.length > 0 && (
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">From our jobs</h2>
+        <div class="gallery">{gallery.map((p) => <figure class="photo"><img src={img800(p.src)} alt={p.alt} width="800" height="600" loading="lazy" /></figure>)}</div>
+      </div>
+    </section>
+  )}
+
+  <Steps />
+  <Faq faqs={s.faqs} title={`${s.navName}: common questions`} />
+
+  <section class="section section--paper">
+    <div class="container">
+      <h2 class="section-title">Other services</h2>
+      <ServiceCards exclude={s.slug} limit={4} />
+    </div>
+  </section>
+
+  <CtaBand photo={lead.src} title={heat ? 'System down right now?' : undefined} />
+</Base>
+
+<style>
+  .top { align-items: start; }
+  .upline { font-size: 16px; color: var(--muted); margin-bottom: 12px; }
+  .intro { margin: 24px 0 26px; }
+  .pic { margin: 0; aspect-ratio: 4 / 3; }
+  .mt { margin-top: 30px; }
+  .why h3 { font-size: 22px; }
+  .why > div { border-top: 3px solid var(--brand); padding-top: 18px; }
+  .dotlist { padding-left: 0; list-style: none; }
+  .dotlist li { position: relative; padding-left: 22px; margin-bottom: 14px; }
+  .dotlist li::before { content: ''; position: absolute; left: 0; top: 11px; width: 9px; height: 9px; border-radius: 50%; background: var(--brand); }
+  .kids { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 18px; margin-top: 24px; }
+  .kid { display: flex; flex-direction: column; gap: 4px; padding: 18px 20px; border-radius: var(--radius); background: var(--paper); text-decoration: none; color: var(--text); }
+  .kid strong { color: var(--ink); font-size: 20px; }
+  .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 26px; }
+  .gallery figure { margin: 0; aspect-ratio: 4 / 3; }
+  @media (max-width: 860px) { .gallery { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 520px) { .gallery { grid-template-columns: 1fr; } }
+</style>

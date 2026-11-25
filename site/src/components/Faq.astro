@@ -1,0 +1,42 @@
+---
+// FAQ accordion that also emits matching FAQPage structured data.
+interface Props {
+  faqs: { q: string; a: string }[];
+  title?: string;
+  eyebrow?: string;
+  paper?: boolean;
+}
+const { faqs, title = 'Common Questions', eyebrow = 'FAQ', paper = false } = Astro.props;
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+};
+---
+<section class:list={['section', { 'section--paper': paper }]}>
+  <div class="container faq">
+    <div class="faq__head">
+      <span class="eyebrow">{eyebrow}</span>
+      <h2 class="section-title">{title}</h2>
+    </div>
+    {faqs.map((f, i) => (
+      <details class="faq__item" open={i === 0}>
+        <summary><h3>{f.q}</h3></summary>
+        <p>{f.a}</p>
+      </details>
+    ))}
+  </div>
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+</section>
+
+<style>
+  .faq { max-width: 880px; }
+  .faq__head { margin-bottom: 24px; }
+  .faq__item { border-bottom: 1px solid var(--line); }
+  .faq__item summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 18px 0; }
+  .faq__item summary::-webkit-details-marker { display: none; }
+  .faq__item summary::after { content: '+'; font-family: var(--head); font-size: 34px; line-height: 1; color: var(--red); }
+  .faq__item[open] summary::after { content: '–'; }
+  .faq__item h3 { font-size: 24px; margin: 0; }
+  .faq__item p { margin: 0 0 20px; max-width: 800px; }
+</style>

@@ -1,0 +1,34 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { areas } from '../../data/areas';
+import { site, img800 } from '../../data/site';
+import { breadcrumbs } from '../../data/schema';
+const crumbs = [{ name: 'Service Areas', href: '/service-areas/' }];
+---
+<Base title={`Service Areas | ${site.shortName}`} description={`${site.shortName} is based in Port Moresby and covers Lae, Mt. Hagen and jobs across Papua New Guinea. See the areas we serve and call ${site.phone}.`} schema={[breadcrumbs(crumbs)]}>
+  <PageHero eyebrow="Service areas" title="Where We Work in PNG" sub={`Based in ${site.city}, serving ${site.serviceArea}.`} crumbs={crumbs} />
+  <section class="section">
+    <div class="container">
+      <div class="answer"><p>{site.shortName} is based at 6 Mile in {site.city}, {site.regionName}, and provides pest control and fumigation in Port Moresby, Lae, Mt. Hagen and nationwide across Papua New Guinea.</p></div>
+      <div class="acards">
+        {areas.map((a) => (
+          <a class="acard" href={`/service-areas/${a.slug}/`}>
+            <span class="acard__img"><img src={img800(a.photo)} alt="" width="800" height="600" loading="lazy" /></span>
+            <span class="acard__name">{a.name}</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+  <CtaBand />
+</Base>
+
+<style>
+  .acards { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 22px; margin-top: 34px; }
+  .acard { display: flex; flex-direction: column; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; text-decoration: none; }
+  .acard__img { aspect-ratio: 16 / 10; overflow: hidden; }
+  .acard__img img { width: 100%; height: 100%; object-fit: cover; }
+  .acard__name { padding: 14px 18px; border-top: 4px solid var(--red); font-family: var(--head); font-weight: 800; font-size: 25px; text-transform: uppercase; color: var(--ink); }
+</style>

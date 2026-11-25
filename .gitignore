@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.astro/
+.ftp-staging.txt
+.ftp-live.txt
+screenshots/
+.DS_Store
+preview/
+_incoming/old-site/

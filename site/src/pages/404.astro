@@ -1,0 +1,19 @@
+---
+import Base from '../layouts/Base.astro';
+import ServiceCards from '../components/ServiceCards.astro';
+import { site } from '../data/site';
+---
+<Base title={`Page Not Found | ${site.shortName}`} description="That page doesn’t exist." noindex>
+  <section class="section">
+    <div class="container">
+      <span class="eyebrow">404</span>
+      <h1 class="section-title">That Page Isn’t Here</h1>
+      <p class="lead">Try one of our services below, or give us a call at <a href={`tel:${site.phoneIntl}`}>{site.phone}</a>.</p>
+      <div class="btn-row" style="margin-bottom:40px">
+        <a class="btn btn--red" href={site.quoteUrl}>{site.ctaLabel}</a>
+        <a class="btn btn--outline" href="/">Go to the Homepage</a>
+      </div>
+      <ServiceCards />
+    </div>
+  </section>
+</Base>

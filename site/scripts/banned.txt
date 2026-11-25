@@ -1,0 +1,4 @@
+# Words or phrases the client does NOT want on the site (one per line, case-insensitive).
+# scripts/check.py fails the build check if any appear. Examples:
+# lorem ipsum
+lorem ipsum

@@ -1,0 +1,40 @@
+---
+import Base from '../layouts/Base.astro';
+import QuoteForm from '../components/QuoteForm.astro';
+import { site, img } from '../data/site';
+import { breadcrumbs } from '../data/schema';
+const crumbs = [{ name: site.ctaLabel, href: site.quoteUrl }];
+const contact = { '@context': 'https://schema.org', '@type': 'ContactPage', name: site.ctaLabel, url: `${site.url}${site.quoteUrl}`, about: { '@id': `${site.url}/#business` } };
+---
+<Base title={`${site.ctaLabel} | ${site.shortName}`} description={`Request a free pest control or fumigation quote from ${site.shortName} in Port Moresby. Call or WhatsApp ${site.phone}, Mon–Sat 8:30am–4:30pm.`} schema={[breadcrumbs(crumbs), contact]}>
+  <section class="qpage" style={`--bg:url('${img('hero')}')`}>
+    <div class="container qpage__grid">
+      <div>
+        <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a> › <span>{site.ctaLabel}</span></nav>
+        <span class="eyebrow qpage__eyebrow">No cost, no obligation</span>
+        <h1>{site.ctaLabel}</h1>
+        <p class="sub">Tell us what you need treated, where and when. We will come back to you with the right treatment and a clear price.</p>
+        <ul class="checks checks--light">
+          <li>Free quotes for homes and businesses</li>
+          <li>Pest control, fumigation, termites, fogging and disinfection</li>
+          <li>Port Moresby, Lae, Mt. Hagen and nationwide</li>
+        </ul>
+        <div class="callbox"><span>Rather talk now?</span><a href={`tel:${site.phoneIntl}`}>{site.phone}</a></div>
+      </div>
+      <QuoteForm />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .qpage { color: #fff; background: linear-gradient(rgba(12,12,12,.86), rgba(12,12,12,.9)), var(--bg) center/cover no-repeat; padding: 64px 0 80px; }
+  .qpage__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: start; }
+  .qpage h1 { color: #fff; font-size: clamp(40px, 5.4vw, 64px); }
+  .qpage__eyebrow { color: #fff; }
+  .sub { font-size: 21px; color: #eceae6; margin-bottom: 24px; }
+  .checks--light li { color: #fff; }
+  .callbox { margin-top: 26px; padding: 18px 22px; border: 2px solid rgba(255,255,255,.25); border-radius: var(--radius); display: inline-flex; flex-direction: column; }
+  .callbox span { font-weight: 600; color: #d6d6d6; }
+  .callbox a { font-family: var(--head); font-weight: 800; font-size: 40px; color: #fff; text-decoration: none; line-height: 1.1; }
+  @media (max-width: 900px) { .qpage__grid { grid-template-columns: 1fr; gap: 34px; } .qpage { padding: 44px 0 60px; } }
+</style>

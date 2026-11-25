@@ -1,0 +1,69 @@
+---
+import { site, waLink } from '../data/site';
+import { services } from '../data/services';
+import { areas } from '../data/areas';
+const year = new Date().getFullYear();
+const social = Object.entries(site.social).filter(([, v]) => v);
+---
+<footer class="site-footer">
+  <div class="container footer__grid">
+    <div>
+      <img src="/images/brand/logo-white.png" alt={site.shortName} width="620" height="200" class="footer__logo" loading="lazy" />
+      <p>{site.description}</p>
+      <a class="footer__phone" href={`tel:${site.phoneIntl}`}>{site.phone}</a>
+      {waLink() && <a class="footer__wa" href={waLink()} rel="noopener">WhatsApp us</a>}
+      {site.email && <a class="footer__mail" href={`mailto:${site.email}`}>{site.email}</a>}
+      <p class="footer__nap">
+        {site.name}<br />
+        {site.streetAddress && <>{site.streetAddress}<br /></>}
+        {site.city}, {site.region} {site.postalCode}<br />
+        {(site as any).country && <>{(site as any).country}<br /></>}
+        {site.hours}
+        {site.license && <><br />License #{site.license}</>}
+      </p>
+      {social.length > 0 && <p class="footer__social">{social.map(([k, v]) => <a href={v} rel="noopener">{k === 'google' ? 'Google' : k[0].toUpperCase() + k.slice(1)}</a>)}</p>}
+    </div>
+    <div>
+      <h2 class="footer__title">Services</h2>
+      <ul>{services.map((s) => <li><a href={`/${s.slug}/`}>{s.navName}</a></li>)}</ul>
+    </div>
+    <div>
+      <h2 class="footer__title">Service Areas</h2>
+      <ul>{areas.map((a) => <li><a href={`/service-areas/${a.slug}/`}>{a.name}</a></li>)}</ul>
+    </div>
+    <div>
+      <h2 class="footer__title">Company</h2>
+      <ul>
+        <li><a href={site.quoteUrl}>{site.ctaLabel}</a></li>
+        <li><a href="/about/">About</a></li>
+        <li><a href="/faq/">FAQ</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <div class="container">
+      © {year} {site.name} · <a href="/privacy/">Privacy Policy</a> · <a href="/sitemap-index.xml">Sitemap</a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer { background: var(--ink); color: #c3c5c9; font-size: 16px; }
+  .footer__grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr .8fr; gap: 40px; padding-top: 64px; padding-bottom: 46px; }
+  .footer__logo { width: 210px; margin-bottom: 18px; }
+  .footer__phone { display: block; font-family: var(--head); font-size: 36px; font-weight: 800; color: #fff; text-decoration: none; margin-bottom: 6px; }
+  .footer__phone:hover { color: var(--accent-light); }
+  .footer__wa, .footer__mail { display: block; color: var(--accent-light); font-weight: 600; text-decoration: none; margin-bottom: 8px; }
+  .footer__nap { font-size: 15px; color: #9a9da3; }
+  .footer__social { display: flex; gap: 16px; }
+  .footer__social a { color: var(--accent-light); font-weight: 600; text-decoration: none; }
+  .site-footer .footer__title { color: #fff; font-size: 21px; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 12px; }
+  .site-footer ul { list-style: none; margin: 0; padding: 0; }
+  .site-footer li { margin-bottom: 7px; }
+  .site-footer ul a { color: #e6e7e9; text-decoration: none; }
+  .site-footer ul a:hover { color: var(--accent-light); }
+  .footer__bottom { border-top: 1px solid rgba(255,255,255,.1); padding: 18px 0; font-size: 14px; text-align: center; color: #9a9da3; }
+  .footer__bottom a { color: #c3c5c9; }
+  @media (max-width: 960px) { .footer__grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .footer__grid { grid-template-columns: 1fr; } }
+</style>

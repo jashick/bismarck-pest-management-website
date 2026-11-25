@@ -1,0 +1,27 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import ServiceCards from '../components/ServiceCards.astro';
+import { site } from '../data/site';
+import { services } from '../data/services';
+import { breadcrumbs } from '../data/schema';
+
+const crumbs = [{ name: 'Services', href: '/services/' }];
+const list = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: `${site.shortName} services`,
+  itemListElement: services.map((s, i) => ({ '@type': 'ListItem', position: i + 1, name: s.navName, url: `${site.url}/${s.slug}/` })),
+};
+---
+<Base title={`Services | ${site.shortName}`} description={`Pest control, fumigation, termite treatment, fogging, misting and disinfection from ${site.shortName} in Port Moresby, Lae, Mt. Hagen and across PNG.`} schema={[breadcrumbs(crumbs), list]}>
+  <PageHero eyebrow="Services" title="Pest Control & Fumigation Services" sub="Everything we do, for homes, businesses and exporters across Papua New Guinea." crumbs={crumbs} />
+  <section class="section">
+    <div class="container">
+      <div class="answer"><p>{site.shortName} offers general pest control, fumigation of shipping containers, import and export commodities, artifacts and handicrafts, pre- and post-construction termite and soil treatment, fogging and misting, public health disinfection and commercial pest control in Port Moresby, Lae, Mt. Hagen and across Papua New Guinea.</p></div>
+      <div style="margin-top:34px"><ServiceCards /></div>
+    </div>
+  </section>
+  <CtaBand />
+</Base>

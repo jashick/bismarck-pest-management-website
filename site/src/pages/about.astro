@@ -1,0 +1,34 @@
+---
+// About page: the owner's real story builds trust and gives AI assistants the facts they need.
+// Use real names, real years, real photos. Add Person schema for the owner if they want to be named.
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { site, img800 } from '../data/site';
+import { breadcrumbs } from '../data/schema';
+const crumbs = [{ name: 'About', href: '/about/' }];
+const person = { '@context': 'https://schema.org', '@type': 'Person', name: site.owner, jobTitle: 'Owner', worksFor: { '@id': `${site.url}/#business` }, sameAs: ['https://pg.linkedin.com/in/timothy-t-thomas-40089a1b2'] };
+const about = { '@context': 'https://schema.org', '@type': 'AboutPage', name: `About ${site.shortName}`, url: `${site.url}/about/`, about: { '@id': `${site.url}/#business` } };
+---
+<Base title={`About ${site.shortName} | Port Moresby, PNG`} description={`About ${site.shortName}: Port Moresby pest control and fumigation company owned by Timothy Thomas, serving Lae, Mt. Hagen and all of PNG.`} schema={[breadcrumbs(crumbs), about, person]}>
+  <PageHero eyebrow="About us" title="About Bismarck Pest Management" sub="A Port Moresby pest control and fumigation company working across PNG." crumbs={crumbs} />
+  <section class="section">
+    <div class="container grid grid-2">
+      <div>
+        <div class="answer"><p>{site.description}</p></div>
+        <div class="copy">
+          <p>Bismarck Pest Management is owned by Timothy Thomas and runs from the 6 Mile Incubation Center & Open Market on Saraga St in Port Moresby. From there we look after homes, businesses and exporters in Port Moresby, Lae, Mt. Hagen and right across Papua New Guinea.</p>
+          <p>Our work covers the pests that matter in PNG: cockroaches, ants, termites, rats and mice, mosquitoes, flies, bed bugs, fleas, ticks, wood borers, beetles, weevils and moths. We fumigate shipping containers, import and export commodities, artifacts and handicrafts, treat soil for termites before and after construction, fog and mist for mosquitoes and flies, and carry out public health disinfection.</p>
+          <p>We work in houses and flats, and in hotels, restaurants, shops, offices, warehouses, industrial sites and agricultural storage. Whatever the job, we explain what the treatment is, what you need to do, and what it costs before we start.</p>
+        </div>
+      </div>
+      <figure class="photo pic"><img src={img800('placeholder')} alt="Timothy Thomas, Bismarck Pest Management, Port Moresby" width="800" height="600" loading="lazy" /></figure>
+    </div>
+  </section>
+  <CtaBand />
+</Base>
+
+<style>
+  .copy { margin-top: 24px; }
+  .pic { margin: 0; aspect-ratio: 4 / 3; }
+</style>

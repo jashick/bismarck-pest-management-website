@@ -1,0 +1,95 @@
+---
+import { site, waLink } from '../data/site';
+import { services } from '../data/services';
+import { areas } from '../data/areas';
+---
+<header class="site-header">
+  <div class="topbar">
+    <div class="container topbar__inner">
+      <span>{site.tagline}</span>
+      <span class="topbar__right">{waLink() && <a href={waLink()} class="topbar__wa" rel="noopener">WhatsApp</a>}<a href={`tel:${site.phoneIntl}`} class="topbar__phone">Call {site.phone}</a></span>
+    </div>
+  </div>
+  <div class="container header__inner">
+    <a href="/" class="logo" aria-label={`${site.shortName} home`}>
+      <img src="/images/brand/logo.png" alt={site.shortName} width="620" height="200" />
+    </a>
+
+    <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-label="Open menu" />
+    <label for="nav-toggle" class="nav-burger" aria-hidden="true"><span></span><span></span><span></span></label>
+
+    <nav class="nav" aria-label="Main">
+      <ul>
+        <li class="has-menu">
+          <a href="/services/">Services</a>
+          <div class="mega mega--small">
+            <ul>{services.map((s) => <li><a href={`/${s.slug}/`}>{s.navName}</a></li>)}</ul>
+          </div>
+        </li>
+        <li class="has-menu">
+          <a href="/service-areas/">Service Areas</a>
+          <div class="mega mega--small">
+            <ul>{areas.map((a) => <li><a href={`/service-areas/${a.slug}/`}>{a.name}</a></li>)}</ul>
+          </div>
+        </li>
+        <li><a href="/about/">About</a></li>
+        <li><a href="/faq/">FAQ</a></li>
+        <li class="nav__cta"><a class="btn btn--red" href={site.quoteUrl}>{site.ctaLabel}</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="callbar" role="navigation" aria-label="Quick contact">
+  <a href={`tel:${site.phoneIntl}`} class="callbar__call">Call Now</a>
+  <a href={site.quoteUrl} class="callbar__offer">{site.ctaShort}</a>
+</div>
+
+<style>
+  .site-header { position: sticky; top: 0; z-index: 50; background: #fff; border-bottom: 4px solid var(--red); }
+  .topbar { background: var(--ink); color: #e9e9e9; font-size: 15px; }
+  .topbar__inner { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-top: 7px; padding-bottom: 7px; }
+  .topbar__phone { color: #fff; font-family: var(--head); font-weight: 700; font-size: 19px; letter-spacing: .03em; text-decoration: none; }
+  .topbar__right { display: flex; align-items: center; gap: 18px; white-space: nowrap; }
+  .topbar__wa { color: var(--accent-light); font-weight: 600; text-decoration: none; }
+  .topbar__phone:hover { color: var(--accent-light); }
+  .header__inner { display: flex; align-items: center; justify-content: space-between; padding-top: 10px; padding-bottom: 10px; }
+  .logo img { width: 220px; height: auto; }
+  .nav > ul { list-style: none; display: flex; align-items: center; gap: 2px; margin: 0; padding: 0; }
+  .nav a { display: block; padding: 10px 13px; font-family: var(--head); font-weight: 700; font-size: 19px; letter-spacing: .03em; text-transform: uppercase; color: var(--ink); text-decoration: none; }
+  .nav a:hover { color: var(--red); }
+  .nav .btn { color: #fff; padding: 11px 22px; margin-left: 8px; }
+  .nav .btn:hover { color: #fff; }
+  .has-menu { position: relative; }
+  .has-menu > a::after { content: '▾'; font-size: 13px; margin-left: 6px; }
+  .mega { position: absolute; top: 100%; left: 0; min-width: 260px; padding: 18px 22px; background: #fff; border-top: 4px solid var(--red); box-shadow: 0 16px 34px rgba(0,0,0,.16); opacity: 0; visibility: hidden; transform: translateY(6px); transition: all .15s ease; }
+  .has-menu:hover .mega, .has-menu:focus-within .mega { opacity: 1; visibility: visible; transform: none; }
+  .mega ul { list-style: none; margin: 0; padding: 0; }
+  .mega a { font-family: var(--body); text-transform: none; letter-spacing: 0; font-weight: 600; font-size: 16px; padding: 6px 0; }
+  .nav-toggle, .nav-burger { display: none; }
+  .callbar { display: none; }
+
+  @media (max-width: 1100px) {
+    .topbar__inner > span:first-child { display: none; }
+    .topbar__inner { justify-content: center; }
+    .logo img { width: 180px; }
+    .nav-burger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; padding: 10px; }
+    .nav-burger span { width: 28px; height: 3px; background: var(--ink); border-radius: 2px; }
+    /* Don't put overflow:hidden on html/body for the open menu: it breaks the sticky header. The panel scrolls itself. */
+    .nav { display: none; position: absolute; top: 100%; left: 0; right: 0; background: #fff; box-shadow: 0 14px 24px rgba(0,0,0,.12); padding: 10px 20px 28px; height: calc(100dvh - 120px); overflow-y: auto; overscroll-behavior: contain; }
+    .nav-toggle:checked ~ .nav { display: block; }
+    .nav > ul { flex-direction: column; align-items: stretch; }
+    .nav > ul > li { border-bottom: 1px solid var(--line); }
+    .mega { position: static; opacity: 1; visibility: visible; transform: none; box-shadow: none; border: 0; min-width: 0; padding: 0 0 12px 14px; }
+    .has-menu > a::after { content: ''; }
+    .nav__cta { border: 0 !important; margin-top: 14px; }
+    .nav .btn { display: flex; margin: 0; }
+    .site-header:has(.nav-toggle:checked) { z-index: 2147483647; }
+  }
+  @media (max-width: 760px) {
+    .callbar { display: grid; grid-template-columns: 1fr 1fr; position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; box-shadow: 0 -4px 16px rgba(0,0,0,.2); }
+    .callbar a { display: flex; align-items: center; justify-content: center; min-height: 58px; font-family: var(--head); font-weight: 800; font-size: 20px; letter-spacing: .03em; text-transform: uppercase; text-decoration: none; }
+    .callbar__call { background: var(--ink); color: #fff; }
+    .callbar__offer { background: var(--red); color: #fff; }
+  }
+</style>

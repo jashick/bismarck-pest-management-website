@@ -1,0 +1,64 @@
+---
+import { site, img, img800 } from '../data/site';
+
+interface Crumb { name: string; href: string; }
+interface Props {
+  eyebrow?: string;
+  title: string;
+  sub?: string;
+  photo?: string;      // photo name in /images/photos (no extension)
+  crumbs?: Crumb[];    // breadcrumb trail (Home is added automatically)
+  chips?: string[];    // short trust points under the buttons (only confirmed facts)
+  primary?: { label: string; href: string };
+  secondary?: { label: string; href: string } | false;
+  big?: boolean;
+  heat?: boolean;     // emergency pages: --heat accent primary button + bottom rule
+}
+const {
+  eyebrow, title, sub, photo = 'hero', crumbs = [], chips = [],
+  primary = { label: site.ctaLabel, href: site.quoteUrl },
+  secondary = { label: `Call ${site.phone}`, href: `tel:${site.phoneIntl}` },
+  big = false,
+  heat = false,
+} = Astro.props;
+---
+<section class:list={['hero', { 'hero--big': big, 'hero--heat': heat }]}>
+  <img class="hero__bg" src={img(photo)} srcset={`${img800(photo)} 800w, ${img(photo)} 1600w`} sizes="100vw" alt="" fetchpriority="high" decoding="async" />
+  <div class="container">
+    {crumbs.length > 0 && (
+      <nav class="breadcrumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>{crumbs.map((c, i) => <> › {i === crumbs.length - 1 ? <span>{c.name}</span> : <a href={c.href}>{c.name}</a>}</>)}
+      </nav>
+    )}
+    {eyebrow && <span class="eyebrow hero__eyebrow">{eyebrow}</span>}
+    <h1>{title}</h1>
+    {sub && <p class="hero__sub">{sub}</p>}
+    <div class="btn-row">
+      <a class:list={['btn', heat ? 'btn--heat' : 'btn--red']} href={primary.href}>{primary.label}</a>
+      {secondary && <a class="btn btn--ghost" href={secondary.href}>{secondary.label}</a>}
+    </div>
+    {chips.length > 0 && <ul class="hero__chips">{chips.map((c) => <li>{c}</li>)}</ul>}
+    <slot />
+  </div>
+</section>
+
+<style>
+  .hero { position: relative; isolation: isolate; overflow: hidden; color: #fff; background: var(--ink); padding: 76px 0 70px; }
+  .hero--big { padding: 120px 0 104px; }
+  .hero--heat { border-bottom: 6px solid var(--heat); }
+  .hero__bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
+  .hero::before { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(10,10,10,.92) 0%, rgba(10,10,10,.8) 45%, rgba(10,10,10,.45) 100%); }
+  .hero h1 { color: #fff; font-size: clamp(38px, 5.6vw, 66px); max-width: 820px; text-wrap: balance; }
+  .hero--big h1 { font-size: clamp(42px, 6.4vw, 78px); }
+  .hero__eyebrow { color: #fff; }
+  .hero__sub { font-size: 21px; line-height: 1.55; max-width: 660px; color: #eceae6; margin-bottom: 28px; }
+  .hero__chips { list-style: none; display: flex; flex-wrap: wrap; gap: 10px 22px; padding: 0; margin: 30px 0 0; font-family: var(--head); font-weight: 700; font-size: 18px; letter-spacing: .06em; text-transform: uppercase; }
+  .hero__chips li { display: flex; align-items: center; gap: 8px; }
+  .hero__chips li::before { content: ''; width: 10px; height: 10px; background: var(--red); transform: rotate(45deg); }
+  @media (max-width: 760px) {
+    .hero, .hero--big { padding: 52px 0 50px; }
+    .hero::before { background: rgba(10,10,10,.78); }
+    .hero__sub { font-size: 19px; }
+    .hero .btn { width: 100%; }
+  }
+</style>

@@ -1,0 +1,28 @@
+---
+import { site, img } from '../data/site';
+interface Props { title?: string; sub?: string; photo?: string; }
+const {
+  title = 'Ready to Get Started?',
+  sub = `Call ${site.phone} or request a free quote online. We’ll get back to you fast.`,
+  photo = 'hero',
+} = Astro.props;
+---
+<section class="cta" style={`--cta-img:url('${img(photo)}')`}>
+  <div class="container cta__inner">
+    <h2>{title}</h2>
+    <p>{sub}</p>
+    <div class="btn-row cta__row">
+      <a class="btn btn--red" href={site.quoteUrl}>{site.ctaLabel}</a>
+      <a class="btn btn--ghost" href={`tel:${site.phoneIntl}`}>Call {site.phone}</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta { color: #fff; background: linear-gradient(rgba(12,12,12,.84), rgba(12,12,12,.84)), var(--cta-img) center/cover no-repeat; padding: 96px 0; border-top: 6px solid var(--red); }
+  .cta__inner { text-align: center; max-width: 860px; }
+  .cta h2 { color: #fff; font-size: clamp(36px, 5.4vw, 60px); text-transform: uppercase; }
+  .cta p { font-size: 21px; margin-bottom: 30px; color: #eceae6; }
+  .cta__row { justify-content: center; }
+  @media (max-width: 560px) { .cta { padding: 64px 0; } .cta .btn { width: 100%; } }
+</style>

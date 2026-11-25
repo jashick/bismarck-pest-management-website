@@ -1,0 +1,6 @@
+{
+  "_note": "SiteGround FTPS. host = the server hostname from Site Tools > FTP (e.g. gvam1060.siteground.biz; the ftp.<domain> name fails the TLS hostname check). Credentials live OUTSIDE the project in ../.ftp-staging.txt and ../.ftp-live.txt (line 1 username, line 2 password). Never print them.",
+  "host": "TODO.siteground.biz",
+  "stagingUrl": "https://staging.bismarckpest.com",
+  "liveUrl": "https://www.bismarckpest.com"
+}

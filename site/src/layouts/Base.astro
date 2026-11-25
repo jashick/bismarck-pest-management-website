@@ -1,0 +1,111 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { site, img } from '../data/site';
+import { areas } from '../data/areas';
+import { services } from '../data/services';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  schema?: Record<string, unknown>[];
+  noindex?: boolean;
+}
+const { title, description, image = img('hero'), schema = [], noindex = false } = Astro.props;
+const canonical = new URL(Astro.url.pathname, site.url).href;
+const ogImage = new URL(image, site.url).href;
+const sameAs = Object.values(site.social).filter(Boolean);
+
+// Business entity on every page so search engines and AI assistants always know exactly who this is.
+const business: Record<string, unknown> = {
+  '@context': 'https://schema.org',
+  '@type': site.schemaType,
+  '@id': `${site.url}/#business`,
+  name: site.name,
+  alternateName: site.shortName,
+  url: `${site.url}/`,
+  logo: `${site.url}/images/brand/logo.png`,
+  image: ogImage,
+  description: site.description,
+  telephone: site.phoneIntl,
+  ...(site.email ? { email: site.email } : {}),
+  ...(site.founded ? { foundingDate: site.founded } : {}),
+  priceRange: site.priceRange,
+  openingHours: site.openingHours,
+  address: {
+    '@type': 'PostalAddress',
+    ...(site.streetAddress ? { streetAddress: site.streetAddress } : {}),
+    addressLocality: site.city,
+    addressRegion: site.region,
+    ...(site.postalCode ? { postalCode: site.postalCode } : {}),
+    addressCountry: (site as any).countryCode || 'US',
+  },
+  areaServed: areas.map((a) => ({ '@type': 'Place', name: `${a.name}, ${(site as any).country || site.regionName}` })),
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: `${site.shortName} services`,
+    itemListElement: services.map((s) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name: s.navName, url: `${site.url}/${s.slug}/` } })),
+  },
+  ...(site.additionalType ? { additionalType: site.additionalType } : {}),
+  ...(site.geo ? { geo: { '@type': 'GeoCoordinates', latitude: site.geo.lat, longitude: site.geo.lng } } : {}),
+  ...(site.social.google ? { hasMap: site.social.google } : {}),
+  ...(site.owner ? { founder: { '@type': 'Person', name: site.owner } } : {}),
+  ...(site.payments ? { paymentAccepted: site.payments } : {}),
+  ...(site.license ? { hasCredential: { '@type': 'EducationalOccupationalCredential', credentialCategory: 'license', name: `${site.licenseName || 'License'} ${site.license}`, ...(site.licenseBy ? { recognizedBy: { '@type': 'GovernmentOrganization', name: site.licenseBy } } : {}) } } : {}),
+  ...(sameAs.length ? { sameAs } : {}),
+};
+const website = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${site.url}/#website`,
+  url: `${site.url}/`,
+  name: site.shortName,
+  publisher: { '@id': `${site.url}/#business` },
+};
+const graph = [business, website, ...schema];
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    {site.ga4 && (
+      <script is:inline define:vars={{ id: site.ga4 }}>
+        // GA4: the queue starts right away (no hits lost) but the library loads after first interaction or 2.5s, so it doesn't slow the page.
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date()); gtag('config', id);
+        var done = false;
+        function load() { if (done) return; done = true; var s = document.createElement('script'); s.async = true; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + id; document.head.appendChild(s); }
+        ['scroll', 'pointerdown', 'keydown', 'touchstart'].forEach(function (e) { addEventListener(e, load, { once: true, passive: true }); });
+        addEventListener('load', function () { setTimeout(load, 2500); });
+      </script>
+    )}
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta name="robots" content={noindex ? 'noindex, follow' : 'max-image-preview:large, max-snippet:-1, max-video-preview:-1'} />
+    <meta name="theme-color" content="#151515" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.shortName} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="/favicon-32.png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="preload" href="/fonts/barlow-condensed-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/barlow-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+    {graph.map((g) => <script type="application/ld+json" set:html={JSON.stringify(g)} />)}
+  </head>
+  <body>
+    <a class="sr-only skip" href="#main">Skip to content</a>
+    <Header />
+    <main id="main"><slot /></main>
+    <Footer />
+  </body>
+</html>

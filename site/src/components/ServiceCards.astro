@@ -1,0 +1,32 @@
+---
+import { img800 } from '../data/site';
+import { services } from '../data/services';
+interface Props { exclude?: string; limit?: number; }
+const { exclude, limit } = Astro.props;
+let list = services.filter((s) => s.slug !== exclude);
+if (limit) list = list.slice(0, limit);
+---
+<div class:list={['cards', { 'cards--5': list.length % 5 === 0 && list.length >= 5, 'cards--3': list.length % 3 === 0 && list.length % 4 !== 0 && list.length >= 6 }]}>
+  {list.map((s) => (
+    <a class="scard" href={`/${s.slug}/`}>
+      <span class="scard__img"><img src={img800(s.photos[0].src)} alt={s.photos[0].alt} width="800" height="600" loading="lazy" decoding="async" /></span>
+      <span class="scard__body">
+        <span class="scard__name">{s.navName}</span>
+        <span class="scard__blurb">{s.blurb}</span>
+      </span>
+    </a>
+  ))}
+</div>
+
+<style>
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 22px; }
+  @media (min-width: 1100px) { .cards--5 { grid-template-columns: repeat(5, 1fr); } }
+  @media (min-width: 900px) { .cards--3 { grid-template-columns: repeat(3, 1fr); } }
+  .scard { display: flex; flex-direction: column; background: #fff; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; text-decoration: none; color: var(--text); transition: transform .15s ease, box-shadow .15s ease; }
+  .scard:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(0,0,0,.12); }
+  .scard__img { aspect-ratio: 4 / 3; overflow: hidden; background: #ddd; }
+  .scard__img img { width: 100%; height: 100%; object-fit: cover; }
+  .scard__body { display: block; padding: 16px 18px 20px; border-top: 4px solid var(--red); }
+  .scard__name { display: block; font-family: var(--head); font-weight: 800; font-size: 25px; text-transform: uppercase; color: var(--ink); line-height: 1.1; margin-bottom: 6px; }
+  .scard__blurb { display: block; font-size: 16px; line-height: 1.5; }
+</style>

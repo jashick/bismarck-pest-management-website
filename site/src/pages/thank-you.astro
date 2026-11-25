@@ -1,0 +1,16 @@
+---
+// Set the GHL form's on-submit redirect to this page (clean conversion URL for GA4 and ads).
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+---
+<Base title={`Thank You | ${site.shortName}`} description={`Thanks for contacting ${site.shortName}.`} noindex>
+  <section class="section">
+    <div class="container center">
+      <span class="eyebrow">Got it</span>
+      <h1 class="section-title">Thanks! We’ll Be in Touch Soon.</h1>
+      <p class="lead">We received your request and will reach out shortly.</p>
+      <p class="lead">Need us now? Call <a href={`tel:${site.phoneIntl}`}><strong>{site.phone}</strong></a>.</p>
+      <p><a class="btn btn--outline" href="/">Back to the Homepage</a></p>
+    </div>
+  </section>
+</Base>

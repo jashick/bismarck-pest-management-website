@@ -1,0 +1,27 @@
+---
+// Includes SMS consent language required for A2P 10DLC text messaging through GoHighLevel.
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+const domain = site.url.replace('https://', '');
+---
+<Base title={`Privacy Policy | ${site.shortName}`} description={`How ${site.name} collects and uses the information you share through this website.`}>
+  <section class="section">
+    <div class="container prose">
+      <h1>Privacy Policy</h1>
+      <p><em>Last updated 25 November 2026</em></p>
+      <p>This policy explains how {site.name} (“we,” “us”) handles information collected through {domain}.</p>
+      <h2>Information we collect</h2>
+      <p>When you fill out a form or contact us, we collect what you choose to share, such as your name, phone number, email address, service address and message. We may also collect basic technical information such as browser type, pages visited and general location through cookies and analytics tools.</p>
+      <h2>How we use it</h2>
+      <p>We use your information to respond to you, schedule and provide services, send estimates and invoices, and keep business records. We may contact you by phone, text or email about your request.</p>
+      <h2>Text messages</h2>
+      <p>If you give us your mobile number, you agree that we may text you about your request and service. Message frequency varies. Message and data rates may apply. Reply STOP to opt out or HELP for help. We do not sell or share your mobile number or text-messaging consent with third parties for their marketing.</p>
+      <h2>Sharing</h2>
+      <p>We do not sell your personal information. We share it only with service providers that help us run our business (such as our website host, scheduling, form and CRM software, and analytics), when required by law, or to complete a service you’ve requested.</p>
+      <h2>Your choices</h2>
+      <p>You can ask us to update or delete your information by calling us at {site.phone}{site.email && <> or emailing <a href={`mailto:${site.email}`}>{site.email}</a></>}.</p>
+      <h2>Contact</h2>
+      <p>{site.name}, {site.city}, {site.regionName} · {site.phone}{site.email && <> · <a href={`mailto:${site.email}`}>{site.email}</a></>}</p>
+    </div>
+  </section>
+</Base>
