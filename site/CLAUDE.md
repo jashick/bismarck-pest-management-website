@@ -1,7 +1,8 @@
-# Bismarck Pest Management website (bismarckpest.com)
+# Bismarck Pest Management website (https://bismarckpest.com, no www)
 
 Static Astro site built from Jeremy's website starter (GitHub jashick/website-starter). Pest control + fumigation
-company in Port Moresby, Papua New Guinea. Deep teal + burnt orange brand, Barlow / Barlow Condensed.
+company in Port Moresby, Papua New Guinea. Navy + red brand (from their logo), Barlow / Barlow Condensed.
+Repo: github.com/jashick/bismarck-pest-management-website. Preview: https://preview.catapultlocal.com/BismarckPest/
 Use the `local-seo-website` skill for how to work on it. GitHub repo is the source of truth.
 
 ## NAP (from GBP, copied 2026-11-25) — lives only in src/data/site.ts
@@ -15,7 +16,8 @@ Use the `local-seo-website` skill for how to work on it. GitHub repo is the sour
 ## Business facts
 - Owner: Timothy Thomas (Jeremy 2026-11-25; LinkedIn "Timothy T. Thomas" pg.linkedin.com/in/timothy-t-thomas-40089a1b2,
   used as Person sameAs on /about/).
-- Email operations@bismarckpest.com (domain assumed bismarckpest.com from the email). Facebook
+- Domain https://bismarckpest.com (Jeremy 2026-11-25; the GBP website field also points to bismarckpest.com).
+  Email operations@bismarckpest.com. Facebook
   facebook.com/fumigationpestcontrolmanagers. Phone doubles as WhatsApp (site.whatsapp → wa.me links).
 - Services (Jeremy's GBP/Facebook summary): general pest control; fumigation (import/export commodities, shipping
   containers, artifacts, handicrafts); pre- and post-construction termite and soil treatment; fogging and misting;
@@ -23,7 +25,14 @@ Use the `local-seo-website` skill for how to work on it. GitHub repo is the sour
 - Pests: cockroaches, ants, termites, rats/mice, mosquitoes, flies, bed bugs, fleas, ticks, wood borers, beetles,
   weevils, moths. Sectors: residential, commercial, industrial, warehouses, hotels, restaurants, shops, offices,
   agricultural storage. Coverage: Port Moresby (base), Mt. Hagen, Lae, nationwide.
-- Year founded, license/registration, payment methods: unknown (fields empty).
+- From the NAQIA Notice of Approval posted in the GBP photos (gbp-44.jpg, dated 28/07/2021): legal name Bismarck Pest
+  Management Ltd; IPA registration 6-259410, registered 14 May 2021 (site.founded = 2021); approved 29 July 2021 to
+  conduct Eco2fume phosphine fumigation for biosecurity and pre-shipment purposes; Eco2fume registration ECOPG0099
+  (site.license); Cytec-accredited fumigators Timothy Thomas, Charlie Carlos, Paul Zamua (only Timothy named on site).
+  The notice lists a different business location (Section 51, Allot 287, Geburi St, Morata 01) and PO Box 7923,
+  Boroko 121, and email timothy.thomas@bismarckpest.com. Site uses the GBP address.
+- The branded truck in the team photo shows another number (342 3542?). Not on the site.
+- Payment methods: unknown.
 
 ## Structure map
 Primary category: Pest control service → Home (/), "Pest Control & Fumigation in Port Moresby"
@@ -50,12 +59,13 @@ Other: /about/ /get-a-quote/ /services/ /service-areas/ /faq/ /privacy/ /thank-y
 - build.sh needs rsync (cloud workspace has none: run `npx astro build` + `python3 scripts/make_preview.py dist ../preview`)
 
 ## Photos
-- None yet. Every hero/card is a placeholder (check.py: 38 errors, all placeholders).
-- Logo: no logo file found; made a temporary wordmark (hexagon "B" + BISMARCK / PEST MANAGEMENT) in
-  public/images/brand. Ask for the real logo.
-- PHOTOS NEEDED: Timothy (headshot / in uniform), team, vehicle, a container under fumigation (tarped/sealed),
-  carvings/bilums being prepared for fumigation, termite soil treatment on a slab site, fogging in a yard,
-  a commercial job (warehouse/restaurant), the 6 Mile office front. Check owner-uploaded GBP and Facebook photos.
+- All 50 GBP "By owner" photos downloaded 2026-11-25 to _incoming/gbp/ (originals gitignored; sources.csv lists the
+  URLs, photos.csv maps file → web name). 30 converted to public/images/photos (gbp-23 and gbp-31 rotated upright).
+  Rest are promo flyers, the logo, and the NAQIA notice (not published as an image).
+- Logo: real logo from the GBP (gbp-20.jpg, 745px JPEG on white). Low-res: ask for the original file. Footer shows it
+  on a white card. Favicon = the red prohibition symbol from the logo.
+- Still missing: artifact/handicraft fumigation photo (page uses the fumigator-with-cylinder shot), fogging photo,
+  pre-construction soil treatment photo, Timothy headshot, the 6 Mile office front.
 
 ## Unconfirmed claims (confirm with Timothy before launch)
 - Free quotes; WhatsApp on the main number; walk-in drop-off of handicrafts at the 6 Mile office
@@ -65,6 +75,7 @@ Other: /about/ /get-a-quote/ /services/ /service-areas/ /faq/ /privacy/ /thank-y
 - Regular/ongoing commercial service; working outside trading hours
 - Disinfection types (after illness, after rodent/cockroach contamination)
 - Whether they provide treatment certificates for export (site does not claim it; worth adding if true)
+- NAQIA approval still current (notice is from July 2021); NAQIA is now the PNG Biosecurity Authority on some sites
 - Area copy general facts: Lae = industrial/port city, very wet; Mt. Hagen = Highlands coffee/produce hub, Kagamuga
   airport, Highlands Highway. Neighbourhood lists kept general.
 
@@ -74,12 +85,15 @@ Other: /about/ /get-a-quote/ /services/ /service-areas/ /faq/ /privacy/ /thank-y
 - ./publish.sh (staging) / ./publish.sh --live (only when approved)
 
 ## Log
+- 2026-11-25: Domain → https://bismarckpest.com (no www; .htaccess updated). GBP owner photos + real logo added; colors
+  switched to the logo's navy/red; NAQIA approval added (fumigation pages, About, FAQ, footer, schema hasCredential);
+  footer link to catapultlocal.com/pest-control-marketing/. check.py 0 errors 0 warnings. Pushed to GitHub, deployed
+  to preview.catapultlocal.com/BismarckPest/.
 - 2026-11-25: Built from the starter in a cloud session. 20 pages. check.py: 38 errors, all placeholder images,
   0 warnings. Screenshots 1280/390 reviewed.
 
 ## Open items
-- Real photos + logo; GHL form embed → site.ts ghl.quoteForm (redirect /thank-you/); GA4 ID
-- Domain/hosting (is bismarckpest.com live? on what host?), deploy.config.json + FTP creds; preview upload to
-  preview.catapultlocal.com/BismarckPest/ from the Mac
+- Missing photos above + original logo file; GHL form embed → site.ts ghl.quoteForm (redirect /thank-you/); GA4 ID
+- Hosting for bismarckpest.com (is something live there now? any old URLs to 301?), deploy.config.json + FTP creds
 - Competitor GBP categories + Maps tests; then GBP alignment (section 12 of the skill)
 - Confirm the unconfirmed claims above

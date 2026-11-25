@@ -13,7 +13,7 @@ interface Props {
   schema?: Record<string, unknown>[];
   noindex?: boolean;
 }
-const { title, description, image = img('hero'), schema = [], noindex = false } = Astro.props;
+const { title, description, image = img('bismarck-pest-team-port-moresby'), schema = [], noindex = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname, site.url).href;
 const ogImage = new URL(image, site.url).href;
 const sameAs = Object.values(site.social).filter(Boolean);

@@ -8,7 +8,7 @@ const social = Object.entries(site.social).filter(([, v]) => v);
 <footer class="site-footer">
   <div class="container footer__grid">
     <div>
-      <img src="/images/brand/logo-white.png" alt={site.shortName} width="620" height="200" class="footer__logo" loading="lazy" />
+      <img src="/images/brand/logo-white.png" alt={site.shortName} width="745" height="327" class="footer__logo" loading="lazy" />
       <p>{site.description}</p>
       <a class="footer__phone" href={`tel:${site.phoneIntl}`}>{site.phone}</a>
       {waLink() && <a class="footer__wa" href={waLink()} rel="noopener">WhatsApp us</a>}
@@ -19,7 +19,7 @@ const social = Object.entries(site.social).filter(([, v]) => v);
         {site.city}, {site.region} {site.postalCode}<br />
         {(site as any).country && <>{(site as any).country}<br /></>}
         {site.hours}
-        {site.license && <><br />License #{site.license}</>}
+        {site.license && <><br />{(site as any).licenseFooter || `License #${site.license}`}</>}
       </p>
       {social.length > 0 && <p class="footer__social">{social.map(([k, v]) => <a href={v} rel="noopener">{k === 'google' ? 'Google' : k[0].toUpperCase() + k.slice(1)}</a>)}</p>}
     </div>
@@ -42,7 +42,7 @@ const social = Object.entries(site.social).filter(([, v]) => v);
   </div>
   <div class="footer__bottom">
     <div class="container">
-      © {year} {site.name} · <a href="/privacy/">Privacy Policy</a> · <a href="/sitemap-index.xml">Sitemap</a>
+      © {year} {site.name} · <a href="/privacy/">Privacy Policy</a> · <a href="/sitemap-index.xml">Sitemap</a> · <a href="https://catapultlocal.com/pest-control-marketing/" rel="noopener">Pest Control Marketing</a>
     </div>
   </div>
 </footer>
@@ -50,7 +50,7 @@ const social = Object.entries(site.social).filter(([, v]) => v);
 <style>
   .site-footer { background: var(--ink); color: #c3c5c9; font-size: 16px; }
   .footer__grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr .8fr; gap: 40px; padding-top: 64px; padding-bottom: 46px; }
-  .footer__logo { width: 210px; margin-bottom: 18px; }
+  .footer__logo { width: 230px; margin-bottom: 18px; background: #fff; padding: 8px 10px; border-radius: var(--radius); }
   .footer__phone { display: block; font-family: var(--head); font-size: 36px; font-weight: 800; color: #fff; text-decoration: none; margin-bottom: 6px; }
   .footer__phone:hover { color: var(--accent-light); }
   .footer__wa, .footer__mail { display: block; color: var(--accent-light); font-weight: 600; text-decoration: none; margin-bottom: 8px; }

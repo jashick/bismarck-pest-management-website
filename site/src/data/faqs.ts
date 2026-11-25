@@ -1,6 +1,7 @@
 // General FAQs. The homepage shows the first 6; /faq/ shows all (both emit FAQPage schema).
 export const faqs = [
   { q: 'Who does pest control and fumigation in Port Moresby?', a: 'Bismarck Pest Management is a pest control and fumigation company based at the 6 Mile Incubation Center & Open Market on Saraga St, Port Moresby. We provide general pest control, fumigation of shipping containers, import and export commodities, artifacts and handicrafts, pre- and post-construction termite and soil treatment, fogging and misting, and public health disinfection for homes and businesses in Port Moresby, Lae, Mt. Hagen and across Papua New Guinea. Call +675 7654 3386.' },
+  { q: 'Are you approved to do fumigation for export?', a: 'Yes. NAQIA (the National Agriculture Quarantine and Inspection Authority) granted Bismarck Pest Management approval in July 2021 to conduct Eco2fume phosphine fumigation for biosecurity and pre-shipment purposes. Our Eco2fume registration number is ECOPG0099.' },
   { q: 'Do you give free quotes?', a: 'Yes. Call +675 7654 3386, message us on WhatsApp or email operations@bismarckpest.com with what you need treated, the location and the size of the property or the goods.' },
   { q: 'What areas do you cover?', a: 'We are based in Port Moresby and cover Lae, Mt. Hagen and jobs nationwide across Papua New Guinea.' },
   { q: 'What pests do you treat?', a: 'Cockroaches, ants, termites, rats and mice, mosquitoes, flies, bed bugs, fleas, ticks, wood borers, beetles, weevils and moths.' },

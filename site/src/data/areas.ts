@@ -62,7 +62,7 @@ export const areas: Area[] = [
     ],
     nearby: ['Lae Port', 'Top Town', 'Industrial areas', 'Highlands Highway', 'Morobe Province'],
     distance: 'Covered from our Port Moresby base. Call to book a job in Lae.',
-    photo: 'placeholder',
+    photo: 'container-fumigation-row-of-containers',
     gallery: [],
     faqs: [
       { q: 'Do you do pest control in Lae?', a: 'Yes. Bismarck Pest Management covers Lae and Morobe Province for general pest control, container and commodity fumigation, termite treatment, fogging and misting, and disinfection.' },
@@ -108,7 +108,7 @@ export const areas: Area[] = [
     ],
     nearby: ['Town centre', 'Kagamuga', 'Highlands Highway', 'Western Highlands Province'],
     distance: 'Covered from our Port Moresby base. Call to book a job in Mt. Hagen.',
-    photo: 'placeholder',
+    photo: 'bismarck-pest-team-branded-vehicle',
     gallery: [],
     faqs: [
       { q: 'Do you do pest control in Mt. Hagen?', a: 'Yes. Bismarck Pest Management covers Mt. Hagen and the Western Highlands for general pest control, fumigation, termite treatment, fogging and misting, and disinfection.' },

@@ -7,3 +7,4 @@ screenshots/
 .DS_Store
 preview/
 _incoming/old-site/
+_incoming/gbp/*.jpg

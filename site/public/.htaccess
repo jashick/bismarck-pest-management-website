@@ -1,11 +1,12 @@
-# Apache (SiteGround) settings. TODO: set the domain in the https/www rule, and add a 301 for every
-# old URL from the previous site (check Google Search Console > Pages and the old sitemap).
+# Apache (SiteGround) settings. No old site known yet; add a 301 for any old URLs if one turns up.
 RewriteEngine On
 
-# Force https + www (match site.url)
+# Force https + no www (match site.url: https://bismarckpest.com). Only matches the client's own domains,
+# so the preview.catapultlocal.com copy is not redirected.
+RewriteCond %{HTTP_HOST} ^(www\.)?bismarckpest\.com$ [NC]
 RewriteCond %{HTTPS} off [OR]
-RewriteCond %{HTTP_HOST} ^bismarckpest\.com$ [NC]
-RewriteRule ^(.*)$ https://www.bismarckpest.com/$1 [R=301,L]
+RewriteCond %{HTTP_HOST} ^www\. [NC]
+RewriteRule ^(.*)$ https://bismarckpest.com/$1 [R=301,L]
 
 # Old WordPress URLs (examples; edit to match the old site)
 RewriteRule ^contact-us/?$ /get-a-quote/ [R=301,L]

@@ -8,16 +8,16 @@
 @font-face { font-family: 'Barlow Condensed'; font-style: normal; font-display: swap; font-weight: 800; src: url('/fonts/barlow-condensed-latin-800-normal.woff2') format('woff2'); }
 
 :root {
-  --ink: #0e2a33;          /* near-black: header bar, footer, headings */
-  --steel: #123c47;        /* dark sections */
-  --red: #c4501a;          /* brand accent: buttons, rules, icons */
-  --red-dark: #9a3d11;
-  --red-text: #a3420f;     /* accent for small text on light backgrounds (must pass WCAG AA) */
-  --accent-light: #ffb27d; /* accent for text on dark backgrounds */
+  --ink: #0f2747;          /* near-black: header bar, footer, headings */
+  --steel: #16335c;        /* dark sections */
+  --red: #c62828;          /* brand accent: buttons, rules, icons */
+  --red-dark: #9e1c1c;
+  --red-text: #b3201f;     /* accent for small text on light backgrounds (must pass WCAG AA) */
+  --accent-light: #ff9e9e; /* accent for text on dark backgrounds */
   --heat: #e3780a;         /* emergency accent (btn--heat, checks--heat, hero heat prop) */
   --heat-dark: #b85c00;
-  --paper: #f1f3ef;        /* warm off-white sections */
-  --line: #dde2dc;
+  --paper: #f2f4f8;        /* warm off-white sections */
+  --line: #dde2ea;
   --text: #34363a;
   --muted: #5d6066;
   --white: #fff;

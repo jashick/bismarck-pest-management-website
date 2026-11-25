@@ -7,7 +7,7 @@ const crumbs = [{ name: site.ctaLabel, href: site.quoteUrl }];
 const contact = { '@context': 'https://schema.org', '@type': 'ContactPage', name: site.ctaLabel, url: `${site.url}${site.quoteUrl}`, about: { '@id': `${site.url}/#business` } };
 ---
 <Base title={`${site.ctaLabel} | ${site.shortName}`} description={`Request a free pest control or fumigation quote from ${site.shortName} in Port Moresby. Call or WhatsApp ${site.phone}, Mon–Sat 8:30am–4:30pm.`} schema={[breadcrumbs(crumbs), contact]}>
-  <section class="qpage" style={`--bg:url('${img('hero')}')`}>
+  <section class="qpage" style={`--bg:url('${img('bismarck-pest-team-port-moresby')}')`}>
     <div class="container qpage__grid">
       <div>
         <nav class="breadcrumbs" aria-label="Breadcrumb"><a href="/">Home</a> › <span>{site.ctaLabel}</span></nav>

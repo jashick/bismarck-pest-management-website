@@ -6,7 +6,7 @@ export const site = {
   // NAP copied verbatim from the Google Business Profile on 2026-11-25 (see CLAUDE.md). Do not edit without the GBP.
   name: 'Bismarck Pest Management',
   shortName: 'Bismarck Pest Management',
-  url: 'https://www.bismarckpest.com',
+  url: 'https://bismarckpest.com',
   phone: '+675 7654 3386',
   phoneIntl: '+675-7654-3386',
   whatsapp: '67576543386',                 // wa.me number (digits only); empty = no WhatsApp links
@@ -18,21 +18,22 @@ export const site = {
   streetAddress: '6 Mile Incubation Center & Open Market, Saraga St',
   country: 'Papua New Guinea',
   countryCode: 'PG',
-  founded: '',
+  founded: '2021',                        // IPA company registration 14 May 2021 (NAQIA notice on the GBP)
   geo: { lat: -9.4535731, lng: 147.2093805 } as undefined | { lat: number; lng: number },
   owner: 'Timothy Thomas',
   schemaType: 'LocalBusiness',
   additionalType: 'https://en.wikipedia.org/wiki/Pest_control',
   description:
-    'Bismarck Pest Management is a pest control and fumigation company based at 6 Mile in Port Moresby, Papua New Guinea. We handle general pest control, fumigation of shipping containers, export goods, artifacts and handicrafts, termite and soil treatment, fogging and misting, and disinfection for homes and businesses in Port Moresby, Lae, Mt. Hagen and across PNG.',
+    'Bismarck Pest Management is a pest control and fumigation company based at 6 Mile in Port Moresby, Papua New Guinea. We handle general pest control, fumigation of shipping containers, export goods, artifacts and handicrafts, termite and soil treatment, fogging and misting, and disinfection for homes and businesses in Port Moresby, Lae, Mt. Hagen and across PNG. We have been approved by NAQIA since 2021 to carry out phosphine fumigation for biosecurity and pre-shipment purposes.',
   tagline: 'Pest control & fumigation in Port Moresby, Lae, Mt. Hagen and across PNG',
   serviceArea: 'Port Moresby, Lae, Mt. Hagen and nationwide across Papua New Guinea',
   hours: 'Mon–Sat 8:30am–4:30pm',
   openingHours: ['Mo-Sa 08:30-16:30'],
   priceRange: 'Free quotes',
-  license: '',
-  licenseName: '',
-  licenseBy: '',
+  license: 'ECOPG0099',
+  licenseName: 'NAQIA fumigation approval, Eco2fume phosphine registration',
+  licenseBy: 'National Agriculture Quarantine and Inspection Authority (NAQIA)',
+  licenseFooter: 'NAQIA-approved fumigator · Eco2fume reg. ECOPG0099',   // footer line (empty = "License #<license>")
   payments: '',
   social: {
     facebook: 'https://www.facebook.com/fumigationpestcontrolmanagers/',

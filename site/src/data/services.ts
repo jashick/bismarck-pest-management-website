@@ -26,8 +26,6 @@ export type Service = {
   emergency?: boolean;        // styles the page with the "heat" accent
 };
 
-const PH = 'placeholder';
-
 export const services: Service[] = [
   {
     slug: 'general-pest-control',
@@ -79,7 +77,7 @@ export const services: Service[] = [
         ],
       },
     ],
-    photos: [{ src: PH, alt: 'Bismarck Pest Management technician treating a home in Port Moresby' }],
+    photos: [{ src: 'kitchen-cockroach-treatment', alt: 'Bismarck Pest Management technician treating a kitchen for cockroaches' }, { src: 'bedroom-bed-bug-treatment', alt: 'Technician spraying a bedroom during a bed bug treatment' }, { src: 'kitchen-cabinet-pest-treatment', alt: 'Technician treating kitchen cabinets for pests' }, { src: 'rodent-bait-station-outside-building', alt: 'Technician checking a rodent bait station beside a building' }, { src: 'rodent-bait-station-office', alt: 'Rodent bait station placed in an office' }],
     faqs: [
       { q: 'How much does pest control cost in Port Moresby?', a: 'It depends on the size of the property, which pests you have and how bad the problem is. We give free quotes: call +675 7654 3386 or message us on WhatsApp with what you are seeing and the size of the place.' },
       { q: 'Do I need to leave the house during treatment?', a: 'For most general treatments you only need to stay out of the treated rooms for a few hours. We will tell you exactly what to do before we start, including covering food and keeping children and pets away until it is dry.' },
@@ -97,7 +95,7 @@ export const services: Service[] = [
     h1: 'Fumigation Services in Port Moresby',
     sub: 'Containers, import and export commodities, artifacts and handicrafts, and stored goods.',
     blurb: 'Shipping containers, import/export commodities, artifacts and handicrafts.',
-    answer: 'Bismarck Pest Management provides fumigation services in Port Moresby and across Papua New Guinea: shipping containers, import and export commodities, artifacts and handicrafts, and stored goods in warehouses. Call +675 7654 3386 to book a fumigation or get a quote.',
+    answer: 'Bismarck Pest Management provides fumigation services in Port Moresby and across Papua New Guinea: shipping containers, import and export commodities, artifacts and handicrafts, and stored goods in warehouses. We have been approved by NAQIA since July 2021 to carry out phosphine fumigation for biosecurity and pre-shipment purposes. Call +675 7654 3386 to book a fumigation or get a quote.',
     intro: [
       'Fumigation reaches pests that sprays cannot: insects deep inside bags of produce, timber, carvings and packed containers. It is how goods are cleared of pests before they cross a border, and how infested stock is saved instead of thrown away.',
       'We fumigate for exporters, importers, businesses and individuals. Whether you have a full container leaving port or a few carvings to take overseas, tell us what the goods are and where they are going, and we will work out the right treatment.',
@@ -116,14 +114,24 @@ export const services: Service[] = [
       'Timber items show borer holes or fine powder (frass)',
     ],
     why: [
+      { t: 'NAQIA approved', d: 'NAQIA approved us in July 2021 to carry out Eco2fume phosphine fumigation for biosecurity and pre-shipment purposes, with accredited fumigators on the team.' },
       { t: 'Containers to carvings', d: 'We handle everything from a full shipping container to a single box of handicrafts.' },
-      { t: 'Exporters and importers', d: 'Fumigation of import and export commodities is a core part of what we do, not an add-on.' },
       { t: 'Clear advice', d: 'Tell us what the goods are and where they are going, and we will tell you what treatment is needed and how long it takes.' },
     ],
-    photos: [{ src: PH, alt: 'Shipping container under fumigation in Port Moresby by Bismarck Pest Management' }],
+    sections: [
+      {
+        h: 'Approved by NAQIA for biosecurity fumigation',
+        p: [
+          'In July 2021 the National Agriculture Quarantine and Inspection Authority (NAQIA) granted Bismarck Pest Management a Notice of Approval to conduct fumigation using Eco2fume phosphine for biosecurity and pre-shipment purposes. Our Eco2fume registration number is ECOPG0099.',
+          'The approval names Timothy Thomas among the company’s accredited fumigators, and our treatments follow the safety and application standard for the fumigant, in consultation with NAQIA.',
+        ],
+      },
+    ],
+    photos: [{ src: 'shipping-containers-under-fumigation', alt: 'Shipping containers taped off during fumigation by Bismarck Pest Management' }, { src: 'fumigator-with-phosphine-cylinder', alt: 'Bismarck fumigator in a respirator with a fumigant cylinder beside a container' }, { src: 'fumigation-equipment-on-work-vehicle', alt: 'Fumigation cylinders and equipment loaded on a Bismarck work vehicle' }],
     faqs: [
       { q: 'How long does fumigation take?', a: 'It depends on the goods, the volume and the treatment required. Many treatments need the goods sealed for a full day or longer, plus time to air out afterwards. Tell us your shipping or travel date and we will plan around it.' },
       { q: 'Is fumigation safe?', a: 'Fumigants are toxic while the treatment is running, which is why fumigation is done by trained people with the area sealed and secured. Goods are aired out before they are released.' },
+      { q: 'Is Bismarck Pest Management approved by NAQIA?', a: 'Yes. NAQIA issued us a Notice of Approval in July 2021 to conduct fumigation using Eco2fume phosphine for biosecurity and pre-shipment purposes (Eco2fume registration ECOPG0099).' },
       { q: 'Can you fumigate goods for export?', a: 'Yes. We fumigate shipping containers and import and export commodities. Check your buyer’s and the destination country’s requirements and share them with us so the treatment matches.' },
     ],
   },
@@ -156,11 +164,11 @@ export const services: Service[] = [
       'Wooden crates, pallets or timber in the load',
     ],
     why: [
-      { t: 'Built for traders', d: 'Container and commodity fumigation is one of the main services we offer, for both import and export.' },
+      { t: 'NAQIA approved', d: 'We hold NAQIA approval (July 2021) for phosphine fumigation for biosecurity and pre-shipment purposes. Eco2fume registration ECOPG0099.' },
       { t: 'Port Moresby and Lae', d: 'We are based in Port Moresby and also cover Lae, PNG’s busiest cargo port, plus jobs nationwide.' },
       { t: 'On your timeline', d: 'Fumigation needs sealed time and airing time. Book early and we will schedule it so your container makes its sailing.' },
     ],
-    photos: [{ src: PH, alt: 'Loaded shipping container being fumigated for export in Papua New Guinea' }],
+    photos: [{ src: 'container-fumigation-technician-ladder', alt: 'Technician on a ladder sealing a shipping container for fumigation' }, { src: 'container-fumigation-row-of-containers', alt: 'Technician working along a row of shipping containers during fumigation' }, { src: 'container-fumigation-sealing-vents', alt: 'Technician sealing container vents before fumigation' }, { src: 'container-fumigation-checking-containers', alt: 'Technicians checking containers during a fumigation job' }],
     faqs: [
       { q: 'How far ahead should I book container fumigation?', a: 'As early as you can, ideally as soon as you know your shipping date. The treatment itself takes time and the goods need to air out before release, so a few days’ notice makes it much easier to meet your sailing.' },
       { q: 'Can you fumigate a container that is already packed?', a: 'Yes. Most container fumigation is done on loaded containers so the goods and the packaging are treated together.' },
@@ -196,8 +204,8 @@ export const services: Service[] = [
       'A carving shows small holes or fine wood powder',
     ],
     why: [
+      { t: 'NAQIA approved', d: 'We are approved by NAQIA to carry out phosphine fumigation for biosecurity and pre-shipment purposes.' },
       { t: 'Protect the piece', d: 'Borers and beetles can keep damaging a carving long after it is bought. Fumigation stops them.' },
-      { t: 'Smoother biosecurity', d: 'Untreated natural items are often held or refused overseas. Treating them first gives you the best chance of keeping them.' },
       { t: 'Plan around your flight', d: 'Tell us your travel date when you drop off the items and we will schedule the treatment so they are ready before you leave.' },
     ],
     sections: [
@@ -212,7 +220,7 @@ export const services: Service[] = [
         ],
       },
     ],
-    photos: [{ src: PH, alt: 'PNG wooden carvings and bilums prepared for fumigation at Bismarck Pest Management, Port Moresby' }],
+    photos: [{ src: 'fumigator-with-phosphine-cylinder', alt: 'Bismarck fumigator with a fumigant cylinder, ready to start a fumigation' }],
     faqs: [
       { q: 'Do I need to fumigate carvings before taking them to Australia?', a: 'Australia inspects wooden and woven items closely at the border and can hold, treat or refuse items that show pests or are not treated. Fumigating your pieces in PNG before you travel gives them the best chance of getting through. Always check the Australian biosecurity rules for your specific items.' },
       { q: 'How long does handicraft fumigation take?', a: 'Allow at least a day or two for the treatment and airing out. Bring the items in well before your flight, and tell us your travel date so we can plan it.' },
@@ -264,7 +272,7 @@ export const services: Service[] = [
         ],
       },
     ],
-    photos: [{ src: PH, alt: 'Termite treatment around the footings of a house in Port Moresby' }],
+    photos: [{ src: 'termite-treatment-raised-building', alt: 'Technician treating termite-damaged timber under a raised building' }, { src: 'termite-damaged-cladding-treatment', alt: 'Technician spraying termite-damaged cladding on a building' }, { src: 'termite-nest-under-floor', alt: 'Termite nest found under a floor during an inspection' }, { src: 'block-wall-spray-treatment', alt: 'Technician spraying a block wall during a termite treatment' }],
     faqs: [
       { q: 'How do I know if I have termites?', a: 'Look for mud tubes on walls, posts or foundations, timber that sounds hollow, sticking doors and windows, and winged insects swarming around lights after rain. If you see any of these, call us for an inspection.' },
       { q: 'How much does termite treatment cost?', a: 'It depends on the size and type of building and how much treatment it needs. We inspect first and give you a clear quote before starting.' },
@@ -304,7 +312,7 @@ export const services: Service[] = [
       { t: 'Fits your build', d: 'We schedule around your site works and pour date so the treatment does not hold up the job.' },
       { t: 'One company for later', d: 'We also do post-construction termite treatment, so you have someone to call for the life of the building.' },
     ],
-    photos: [{ src: PH, alt: 'Pre-construction termite soil treatment on a building site in Papua New Guinea' }],
+    photos: [{ src: 'technicians-new-building-site', alt: 'Bismarck Pest Management technicians on a new building site' }],
     faqs: [
       { q: 'When should pre-construction termite treatment be done?', a: 'After the ground is prepared and the footing trenches and plumbing are in, and before the concrete is poured. Tell us your pour date and we will plan the treatment for just before it.' },
       { q: 'Do I still need termite treatment later?', a: 'Pre-construction treatment protects the ground under the slab. It is still worth having the building checked over the years, especially for timber added later, such as stairs, decks and fences.' },
@@ -344,7 +352,7 @@ export const services: Service[] = [
       { t: 'Any size of site', d: 'From a house yard to hotel grounds, warehouses and work camps.' },
       { t: 'Lasting advice', d: 'We show you the breeding spots on your property so you can keep numbers down between treatments.' },
     ],
-    photos: [{ src: PH, alt: 'Technician fogging for mosquitoes around a property in Port Moresby' }],
+    photos: [{ src: 'exterior-spray-treatment-building-entrance', alt: 'Technician spraying around the outside of a building entrance' }, { src: 'ceiling-spray-treatment', alt: 'Technician spraying a timber ceiling space' }],
     faqs: [
       { q: 'Does fogging get rid of mosquitoes?', a: 'Fogging quickly knocks down adult mosquitoes in the treated area. Because new mosquitoes keep breeding in standing water, the best results come from fogging combined with removing breeding sites and repeat treatments when needed.' },
       { q: 'What is the difference between fogging and misting?', a: 'Both spread a fine treatment through the air. Fogging produces a very fine fog that drifts through an area, while misting uses slightly larger droplets that settle on vegetation and surfaces where insects rest. We use whichever suits the site.' },
@@ -384,7 +392,7 @@ export const services: Service[] = [
       { t: 'Works around you', d: 'We schedule around your trading hours to keep disruption low.' },
       { t: 'One call', d: 'If pests caused the problem, we can treat the pests and disinfect the area on the same job.' },
     ],
-    photos: [{ src: PH, alt: 'Disinfection of an office in Port Moresby by Bismarck Pest Management' }],
+    photos: [{ src: 'office-disinfection-spray', alt: 'Technician spraying disinfectant in an office' }, { src: 'floor-disinfection', alt: 'Technician disinfecting a floor' }, { src: 'office-vacuum-cleaning-after-treatment', alt: 'Technician cleaning an office floor' }],
     faqs: [
       { q: 'How long does disinfection take?', a: 'It depends on the size of the area. Most rooms and offices can be treated in a single visit. Tell us the size of the space and we will give you a time estimate with your quote.' },
       { q: 'Can you disinfect after rats or cockroaches?', a: 'Yes. Rats and cockroaches contaminate surfaces where they travel, so we can treat the pests and disinfect the affected areas together.' },
@@ -424,7 +432,7 @@ export const services: Service[] = [
       { t: 'Built around trading hours', d: 'We plan treatments to keep disruption to your customers and staff low.' },
       { t: 'Nationwide reach', d: 'Based in Port Moresby, covering Lae, Mt. Hagen and sites across PNG.' },
     ],
-    photos: [{ src: PH, alt: 'Commercial pest control in a warehouse in Port Moresby' }],
+    photos: [{ src: 'office-pest-control-treatment', alt: 'Technician treating an office for pests' }, { src: 'commercial-kitchen-pest-treatment', alt: 'Technician treating a commercial kitchen' }, { src: 'office-lounge-pest-treatment', alt: 'Technician treating an office lounge area' }, { src: 'perimeter-treatment-commercial-building', alt: 'Technician treating the perimeter of a commercial building' }],
     faqs: [
       { q: 'Do you offer regular pest control for businesses?', a: 'Yes. Tell us about your premises and we will recommend how often it should be treated and give you a quote.' },
       { q: 'Can you treat a restaurant without closing it?', a: 'In most cases we schedule treatment outside trading hours or in sections so you can keep operating. We will tell you what preparation is needed beforehand.' },
