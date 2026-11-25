@@ -6,7 +6,7 @@ export const site = {
   // NAP copied verbatim from the Google Business Profile on 2026-11-25 (see CLAUDE.md). Do not edit without the GBP.
   name: 'Bismarck Pest Management',
   shortName: 'Bismarck Pest Management',
-  url: 'https://bismarckpest.com',
+  url: 'https://www.bismarckpest.com',
   phone: '+675 7654 3386',
   phoneIntl: '+675-7654-3386',
   whatsapp: '67576543386',                 // wa.me number (digits only); empty = no WhatsApp links

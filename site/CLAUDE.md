@@ -1,4 +1,4 @@
-# Bismarck Pest Management website (https://bismarckpest.com, no www)
+# Bismarck Pest Management website (https://www.bismarckpest.com)
 
 Static Astro site built from Jeremy's website starter (GitHub jashick/website-starter). Pest control + fumigation
 company in Port Moresby, Papua New Guinea. Navy + red brand (from their logo), Barlow / Barlow Condensed.
@@ -16,7 +16,7 @@ Use the `local-seo-website` skill for how to work on it. GitHub repo is the sour
 ## Business facts
 - Owner: Timothy Thomas (Jeremy 2026-11-25; LinkedIn "Timothy T. Thomas" pg.linkedin.com/in/timothy-t-thomas-40089a1b2,
   used as Person sameAs on /about/).
-- Domain https://bismarckpest.com (Jeremy 2026-11-25; the GBP website field also points to bismarckpest.com).
+- Domain https://www.bismarckpest.com (Jeremy 2026-11-25: with www; the GBP website field also points there).
   Email operations@bismarckpest.com. Facebook
   facebook.com/fumigationpestcontrolmanagers. Phone doubles as WhatsApp (site.whatsapp → wa.me links).
 - Services (Jeremy's GBP/Facebook summary): general pest control; fumigation (import/export commodities, shipping
@@ -65,7 +65,7 @@ Other: /about/ /get-a-quote/ /services/ /service-areas/ /faq/ /privacy/ /thank-y
 - Logo: real logo from the GBP (gbp-20.jpg, 745px JPEG on white). Low-res: ask for the original file. Footer shows it
   on a white card. Favicon = the red prohibition symbol from the logo.
 - Still missing: artifact/handicraft fumigation photo (page uses the fumigator-with-cylinder shot), fogging photo,
-  pre-construction soil treatment photo, Timothy headshot, the 6 Mile office front.
+  pre-construction soil treatment photo, the 6 Mile office front. (Timothy photo: _incoming/timothy-thomas.jpg, sent by Jeremy.)
 
 ## Unconfirmed claims (confirm with Timothy before launch)
 - Free quotes; WhatsApp on the main number; walk-in drop-off of handicrafts at the 6 Mile office
@@ -85,7 +85,8 @@ Other: /about/ /get-a-quote/ /services/ /service-areas/ /faq/ /privacy/ /thank-y
 - ./publish.sh (staging) / ./publish.sh --live (only when approved)
 
 ## Log
-- 2026-11-25: Domain → https://bismarckpest.com (no www; .htaccess updated). GBP owner photos + real logo added; colors
+- 2026-11-25: Domain back to https://www.bismarckpest.com (Jeremy). Timothy's photo (sent by Jeremy) on /about/ + Person schema.
+- 2026-11-25: GBP photos pass. GBP owner photos + real logo added; colors
   switched to the logo's navy/red; NAQIA approval added (fumigation pages, About, FAQ, footer, schema hasCredential);
   footer link to catapultlocal.com/pest-control-marketing/. check.py 0 errors 0 warnings. Pushed to GitHub, deployed
   to preview.catapultlocal.com/BismarckPest/.

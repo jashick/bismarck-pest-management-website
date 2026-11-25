@@ -7,7 +7,7 @@ import CtaBand from '../components/CtaBand.astro';
 import { site, img800 } from '../data/site';
 import { breadcrumbs } from '../data/schema';
 const crumbs = [{ name: 'About', href: '/about/' }];
-const person = { '@context': 'https://schema.org', '@type': 'Person', name: site.owner, jobTitle: 'Owner', worksFor: { '@id': `${site.url}/#business` }, sameAs: ['https://pg.linkedin.com/in/timothy-t-thomas-40089a1b2'] };
+const person = { '@context': 'https://schema.org', '@type': 'Person', name: site.owner, jobTitle: 'Owner', image: `${site.url}/images/photos/timothy-thomas-owner-bismarck-pest-management.webp`, worksFor: { '@id': `${site.url}/#business` }, sameAs: ['https://pg.linkedin.com/in/timothy-t-thomas-40089a1b2'] };
 const about = { '@context': 'https://schema.org', '@type': 'AboutPage', name: `About ${site.shortName}`, url: `${site.url}/about/`, about: { '@id': `${site.url}/#business` } };
 ---
 <Base title={`About ${site.shortName} | Port Moresby, PNG`} description={`About ${site.shortName}: Port Moresby pest control and fumigation company owned by Timothy Thomas, serving Lae, Mt. Hagen and all of PNG.`} schema={[breadcrumbs(crumbs), about, person]}>
@@ -23,7 +23,7 @@ const about = { '@context': 'https://schema.org', '@type': 'AboutPage', name: `A
           <p>We work in houses and flats, and in hotels, restaurants, shops, offices, warehouses, industrial sites and agricultural storage. Whatever the job, we explain what the treatment is, what you need to do, and what it costs before we start.</p>
         </div>
       </div>
-      <figure class="photo pic"><img src={img800('bismarck-pest-team-port-moresby')} alt="The Bismarck Pest Management team in Port Moresby" width="800" height="600" loading="lazy" /></figure>
+      <figure class="photo pic"><img src={img800('timothy-thomas-owner-bismarck-pest-management')} alt="Timothy Thomas, owner of Bismarck Pest Management, Port Moresby" width="720" height="720" loading="lazy" /><figcaption>Timothy Thomas, owner</figcaption></figure>
     </div>
   </section>
   <CtaBand />
@@ -31,5 +31,6 @@ const about = { '@context': 'https://schema.org', '@type': 'AboutPage', name: `A
 
 <style>
   .copy { margin-top: 24px; }
-  .pic { margin: 0; aspect-ratio: 4 / 3; }
+  .pic { margin: 0; aspect-ratio: 1 / 1; }
+  .pic figcaption { font-size: 15px; color: var(--muted); padding-top: 8px; }
 </style>
